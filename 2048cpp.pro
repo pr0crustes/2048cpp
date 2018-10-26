@@ -24,12 +24,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-    gamewindow.cpp \
-    tile.cpp \
-    board.cpp
+    src/board.cpp \
+    src/gamewindow.cpp \
+    src/main.cpp \
+    src/tile.cpp
 
 HEADERS += \
-    gamewindow.h \
-    tile.h \
-    board.h
+    src/board.h \
+    src/gamewindow.h \
+    src/tile.h
