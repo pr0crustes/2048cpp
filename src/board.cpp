@@ -26,12 +26,34 @@ void Board::setupBoard() {
 }
 
 
+void Board::resetBoard() {
+	foreach (Tile* tile, this->tiles) {
+		tile->setValue();
+	}
+	this->addRandomTile();
+}
+
+
 void Board::afterMovement() {
 	if (this->moved) {
 		this->addRandomTile();
 		this->moved = false;
 		if (!this->isMovePossible()) {
+			this->showLoosePopUp();
 		}
+	}
+}
+
+
+void Board::showLoosePopUp() {
+	int popup = QMessageBox::question(this, "Game Over", "You Lost!", QMessageBox::Ok);
+
+	switch (popup)  {
+		case QMessageBox::Ok:
+			this->resetBoard();
+			break;
+		default:
+			break;
 	}
 }
 

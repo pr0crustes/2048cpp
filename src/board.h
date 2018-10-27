@@ -7,6 +7,7 @@
 #include <QGridLayout>
 #include <QVector>
 #include <QRandomGenerator>
+#include <QMessageBox>
 
 
 class Board : public QWidget {
@@ -16,6 +17,7 @@ class Board : public QWidget {
 		explicit Board(int size, int scale, QWidget *parent = nullptr)
 			: QWidget(parent), moved(true), boardSize(size), boardScale(scale) {}
 		void setupBoard();
+		void resetBoard();
 		void moveUp();
 		void moveDown();
 		void moveLeft();
@@ -34,6 +36,7 @@ class Board : public QWidget {
 		bool isMovePossible();
 		void moveTile(int row, int col, int rowChange, int colChange);
 		void afterMovement();
+		void showLoosePopUp();
 		void addRandomTile();
 
 };
