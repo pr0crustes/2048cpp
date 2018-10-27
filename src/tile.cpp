@@ -1,43 +1,38 @@
 #include "tile.h"
 
 
-Tile::Tile() : QLabel() {
+Tile::Tile() : QLabel(), tileValue(0) {
 	this->setAlignment(Qt::AlignCenter);
 	this->setFont(QFont("Arial", 30, QFont::Bold));
-	this->updateTileColor();
+	this->updateTile();
 }
 
 
 bool Tile::isFree() {
-	return this->text().isEmpty();
+	return this->tileValue == 0;
 }
 
 
 void Tile::setValue(int value) {
-	QString text = value == 0 ? "" : QString::number(value);
-	this->setText(text);
-	this->updateTileColor();
-}
-
-
-void Tile::doubleValue() {
-	this->setValue(2 * this->asInt());
+	this->tileValue = value;
+	this->updateTile();
 }
 
 
 void Tile::addTile(Tile *tile) {
-	int value = this->asInt()+ tile->asInt();
-	this->setValue(value);
+	this->setValue(this->tileValue + tile->tileValue);
 }
 
 
 bool Tile::equalTo(const Tile *other) const {
-	return this->text() == other->text();
+	return this->tileValue == other->tileValue;
 }
 
 
-void Tile::reset() {
-	this->setValue(0);
+void Tile::updateTile() {
+	QString text = this->isFree() ? QString() : QString::number(this->tileValue);
+	this->setText(text);
+	this->updateTileColor();
 }
 
 
@@ -46,66 +41,43 @@ void Tile::updateTileColor() {
 	this->setAutoFillBackground(true);
 	QPalette palette = this->palette();
 	palette.setColor(QPalette::Background, color);
-//	palette.setColor(QPalette::Window, color);
-//	palette.setColor(QPalette::Foreground, color);
-//	palette.setColor(this->backgroundRole(), color);
-//	palette.setColor(this->foregroundRole(), color);
 	this->setPalette(palette);
 }
 
 
 QColor Tile::definedTileColor() {
-	int merges = this->mergeNumber();
-
-	switch (merges) {
+	switch (this->tileValue) {
 		case 0:
 			return QColor(255, 255, 255);
-		case 1:
-			return QColor(150, 200, 255);
 		case 2:
-			return QColor(100, 200, 255);
-		case 3:
-			return QColor(50, 200, 255);
+			return QColor(150, 200, 255);
 		case 4:
-			return QColor(0, 200, 255);
-		case 5:
-			return QColor(0, 70, 255);
-		case 6:
-			return QColor(0, 40, 255);
-		case 7:
-			return QColor(50, 0, 255);
+			return QColor(100, 200, 255);
 		case 8:
+			return QColor(50, 200, 255);
+		case 16:
+			return QColor(0, 200, 255);
+		case 32:
+			return QColor(0, 70, 255);
+		case 64:
+			return QColor(0, 40, 255);
+		case 128:
+			return QColor(50, 0, 255);
+		case 256:
 			return QColor(100, 0, 255);
-		case 9:
+		case 512:
 			return QColor(150, 0, 255);
-		case 10:
+		case 1024:
 			return QColor(150, 0, 200);
-		case 11:
+		case 2048:
 			return QColor(150, 50, 150);
-		case 12:
+		case 4096:
 			return QColor(150, 100, 50);
-		case 13:
+		case 8192:
 			return QColor(150, 150, 50);
-		case 14:
+		case 16384:
 			return QColor(200, 200, 50);
 		default:
 			return QColor(250, 150, 50);
 	}
-}
-
-
-int Tile::asInt() {
-	return this->text().toInt();
-}
-
-
-int Tile::mergeNumber() {
-	int value = this->asInt();
-
-	int merges = 0;
-	while (value >= 2) {
-		merges++;
-		value /= 2;
-	}
-	return merges;
 }

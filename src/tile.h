@@ -12,15 +12,13 @@ class Tile : public QLabel {
 		bool isFree();
 		bool equalTo(const Tile* other) const;
 		void addTile(Tile* tile);
-		void doubleValue();
-		void setValue(int value);
-		void reset();
+		void setValue(int value = 0);
 
 	private:
+		int tileValue;
 		QColor definedTileColor();
+		void updateTile();
 		void updateTileColor();
-		int asInt();
-		int mergeNumber();
 
 };
 

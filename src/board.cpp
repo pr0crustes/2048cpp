@@ -6,6 +6,15 @@ void Board::setupBoard() {
 
 	for (int i = 0; i < this->boardSize * this->boardSize; i++) {
 		Tile* tile = new Tile();
+//#define DEBUG_BOARD  // DEBUG_BOARD is for testing colors.
+#ifdef DEBUG_BOARD
+		if (i == 0) {
+			tile->setValue(2);
+		} else {
+			tile->addTile(this->tiles[i - 1]);
+			tile->addTile(this->tiles[i - 1]);
+		}
+#endif
 		tile->setFixedSize(this->boardScale, this->boardScale);
 		layout->addWidget(tile, i / this->boardSize, i % this->boardSize);
 		this->tiles << tile;
@@ -30,15 +39,11 @@ void Board::moveTile(int row, int col, int rowChange, int colChange) {
 	if (tile && !tile->isFree()) {
 		Tile* nextTile = this->tile(row + rowChange, col + colChange);
 		if (nextTile) {
-			if (tile->equalTo(nextTile)) {
-				tile->reset();
-				nextTile->doubleValue();
-			} else if (nextTile->isFree()) {
+			if (tile->equalTo(nextTile) || nextTile->isFree()) {
 				nextTile->addTile(tile);
-				tile->reset();
+				tile->setValue();
+				this->moved = true;
 			}
-
-			this->moved = true;
 			this->moveTile(row + rowChange, col + colChange, rowChange, colChange);
 		}
 	}
