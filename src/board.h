@@ -29,7 +29,9 @@ class Board : public QWidget {
 
 		Tile* tile(int row, int col);
 		QVector<Tile *> freeTiles();
+		QVector<Tile *> tilesAroundTile(int row, int col);
 		bool inRange(int row, int col);
+		bool isMovePossible();
 		void moveTile(int row, int col, int rowChange, int colChange);
 		void afterMovement();
 		void addRandomTile();

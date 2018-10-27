@@ -1,7 +1,7 @@
 #include "gamewindow.h"
 
 #define SCALE_FACTOR 100
-#define SIZE_NUMBER 6
+#define SIZE_NUMBER 3
 
 
 GameWindow::GameWindow(QWidget *parent) :

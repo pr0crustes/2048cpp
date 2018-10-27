@@ -30,6 +30,8 @@ void Board::afterMovement() {
 	if (this->moved) {
 		this->addRandomTile();
 		this->moved = false;
+		if (!this->isMovePossible()) {
+		}
 	}
 }
 
@@ -61,7 +63,7 @@ void Board::moveUp() {
 
 
 void Board::moveDown() {
-	for (int r = this->boardSize - 2; r >= 0; r--) {
+	for (int r = this->boardSize; r >= 0; r--) {
 		for (int c = 0; c < this->boardSize; c++) {
 			this->moveTile(r, c, 1, 0);
 		}
@@ -119,6 +121,23 @@ QVector<Tile *> Board::freeTiles() {
 }
 
 
+QVector<Tile *> Board::tilesAroundTile(int row, int col) {
+	QVector<Tile *> tilesAround;
+
+	for (int i = -1; i <= 1; i += 2) {
+		Tile* tile = this->tile(row + i, col);
+		if (tile) {
+			tilesAround << tile;
+		}
+		tile = this->tile(row, col + i);
+		if (tile) {
+			tilesAround << tile;
+		}
+	}
+	return tilesAround;
+}
+
+
 void Board::addRandomTile() {
 	QVector<Tile *> freeTiles = this->freeTiles();
 
@@ -130,9 +149,22 @@ void Board::addRandomTile() {
 }
 
 
-
-
-
-
-
-
+bool Board::isMovePossible() {
+	for (int r = 0; r < this->boardSize; r++) {
+		for (int c = 0; c < this->boardSize; c++) {
+			Tile* tile = this->tile(r, c);
+			if (tile) {
+				if (tile->isFree()) {
+					return true;
+				}
+				QVector<Tile *> adjacents = this->tilesAroundTile(r, c);
+				for (int i = 0; i < adjacents.length(); i++) {
+					if (tile->equalTo(adjacents[i])) {
+						return true;
+					}
+				}
+			}
+		}
+	}
+	return false;
+}

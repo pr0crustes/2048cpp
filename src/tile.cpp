@@ -25,6 +25,10 @@ void Tile::addTile(Tile *tile) {
 
 
 bool Tile::equalTo(const Tile *other) const {
+	if (!other) {
+	 return false;
+	}
+
 	return this->tileValue == other->tileValue;
 }
 
