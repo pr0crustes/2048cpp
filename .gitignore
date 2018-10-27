@@ -1,2 +1,9 @@
 .DS_Store
 *.pro.user
+Makefile
+Makefile.Debug
+Makefile.Release
+debug
+release
+2048cpp_plugin_import.cpp
+.qmake.stash
