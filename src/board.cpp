@@ -48,7 +48,7 @@ void Board::afterMovement() {
 void Board::showLoosePopUp() {
 	int popup = QMessageBox::question(this, "Game Over", "You Lost!", QMessageBox::Ok);
 
-	switch (popup)  {
+	switch (popup) {
 		case QMessageBox::Ok:
 			this->resetBoard();
 			break;
@@ -132,8 +132,7 @@ bool Board::inRange(int row, int col) {
 QVector<Tile *> Board::freeTiles() {
 	QVector<Tile *> freeTiles;
 
-	for (int i = 0; i < this->tiles.length(); i++) {
-		Tile * tile = this->tiles[i];
+	foreach (Tile* tile, this->tiles) {
 		if (tile->isFree()) {
 			freeTiles << tile;
 		}
@@ -180,8 +179,8 @@ bool Board::isMovePossible() {
 					return true;
 				}
 				QVector<Tile *> adjacents = this->tilesAroundTile(r, c);
-				for (int i = 0; i < adjacents.length(); i++) {
-					if (tile->equalTo(adjacents[i])) {
+				foreach (Tile* adjacent, adjacents) {
+					if (tile->equalTo(adjacent)) {
 						return true;
 					}
 				}
