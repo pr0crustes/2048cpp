@@ -81,6 +81,8 @@ QColor Tile::definedTileColor() {
 			return QColor(150, 150, 50);
 		case 16384:
 			return QColor(200, 200, 50);
+		case 32768:
+			return QColor(220, 120, 50);
 		default:
 			return QColor(250, 150, 50);
 	}
