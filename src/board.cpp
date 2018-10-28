@@ -10,7 +10,7 @@ void Board::setupBoard() {
 #ifdef DEBUG_BOARD
 		if (i == 0) {
 			tile->setValue(2);
-		} else {
+		} else if (i < 16) {
 			tile->addTile(this->tiles[i - 1]);
 			tile->addTile(this->tiles[i - 1]);
 		}
@@ -22,7 +22,9 @@ void Board::setupBoard() {
 
 	this->setLayout(layout);
 
+#ifndef DEBUG_BOARD
 	this->afterMovement();
+#endif
 }
 
 
