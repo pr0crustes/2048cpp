@@ -11,7 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = 2048cpp
 TEMPLATE = app
 
-CONFIG += sanitizer sanitize_address
+#CONFIG += sanitizer sanitize_address
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
