@@ -1,18 +1,5 @@
 #include "gamewindow.h"
 
-#define SCALE_FACTOR 100
-#define SIZE_NUMBER 6
-
-
-GameWindow::GameWindow(QWidget *parent) :
-	QMainWindow(parent), board(new Board(SIZE_NUMBER, SCALE_FACTOR)) {
-
-	this->board->setupBoard();
-	this->setCentralWidget(board);
-
-	this->setWindowTitle("2048cpp");
-}
-
 
 GameWindow::~GameWindow() {
 	delete this->board;

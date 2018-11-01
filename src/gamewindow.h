@@ -2,20 +2,23 @@
 #define GAMEWINDOW_H
 
 #include "board.h"
+#include "utility.h"
 
 #include <QKeyEvent>
 #include <QMainWindow>
 
 
-namespace Ui {
-	class GameWindow;
-}
-
 class GameWindow : public QMainWindow {
 		Q_OBJECT
 
 	public:
-		explicit GameWindow(QWidget *parent = 0);
+		explicit GameWindow(QWidget *parent = 0, int size = 5, int scale = 100)
+			: QMainWindow(parent), board(new Board(size, scale)) {
+			this->board->setupBoard();
+			this->setCentralWidget(board);
+			this->setWindowTitle("2048cpp");
+			Utility::centralizeWidget(this);
+		}
 		~GameWindow();
 
 	protected:

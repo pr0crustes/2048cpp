@@ -1,25 +1,12 @@
-#include "gamewindow.h"
+#include "startwindow.h"
 
 #include <QApplication>
-#include <QScreen>
-#include <QDesktopWidget>
-#include <QStyle>
+#include <QComboBox>
 
 
 int main(int argc, char *argv[]) {
 	QApplication a(argc, argv);
-	GameWindow w;
-
-	w.adjustSize();
-	w.setGeometry(
-		QStyle::alignedRect(
-			Qt::LeftToRight,
-			Qt::AlignCenter,
-			w.size(),
-			QGuiApplication::screens().first()->availableGeometry()
-		)
-	);
-
+	StartWindow w;
 	w.show();
 	return a.exec();
 }

@@ -29,9 +29,13 @@ SOURCES += \
     src/board.cpp \
     src/gamewindow.cpp \
     src/main.cpp \
-    src/tile.cpp
+    src/tile.cpp \
+    src/startwindow.cpp \
+    src/utility.cpp
 
 HEADERS += \
     src/board.h \
     src/gamewindow.h \
-    src/tile.h
+    src/tile.h \
+    src/startwindow.h \
+    src/utility.h
